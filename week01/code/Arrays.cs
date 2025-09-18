@@ -47,12 +47,19 @@ public static class Arrays
         // be implemented by another person.
 
         ///
-        /// tienes que contar el tamano de la lista y tener el numero, despues restarle donde quieren comenzar, 9 - 3 = 6 
-        /// y luego en otra lista ir por el valor 6 de la lista original y sumarle 1 hasta llegar al 9
-        /// en otra lista ir de la posicion 1 hasta la 6 con los valores de la lista original y depues pegar las dos listas. 
+        /// I need to use the Get Range funcion to create a new list with the GetRange(data.Count - amount, amount) parameter, this will return the last part of the original list
+        /// and then create a second list with the parameters of the first part of the list
+        /// Then clear the original list to remove all data,
+        /// And then use the addRange function to append the last part of the original list at first and then the second part, 
         /// 
-        /// 
+        List<int> first = data.GetRange(data.Count - amount, amount);
+        List<int> second = data.GetRange(0, data.Count-amount);
+        data.Clear();
+        data.AddRange(first);
+        data.AddRange(second);
+        Console.WriteLine("Resultado: " + string.Join(", ", data));
         
         
+
     }
 }
