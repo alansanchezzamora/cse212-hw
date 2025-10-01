@@ -1,4 +1,6 @@
-﻿public class DuplicateCounter
+﻿using System.ComponentModel.DataAnnotations;
+
+public class DuplicateCounter
 {
     //Count how many duplicates are in a collection of data.
 
@@ -15,7 +17,7 @@
             13, 47, 8, 52, 30, 54, 4, 79, 7, 90, 81, 33, 65, 89, 84, 83, 46, 95, 82, 6, 93, 5, 22, 67, 8, 79, 3, 55, 79,
             6, 54, 10, 22, 16, 40, 67, 50, 58, 37, 35, 7, 44, 10, 31, 45, 93, 12, 55, 67, 48, 32, 43, 57, 58, 37, 76,
             85, 47, 80, 18, 32, 59, 98, 92, 53, 98, 29, 61, 82, 42, 78, 97, 23, 94, 38, 20, 73, 11, 99, 94, 92, 82, 82,
-            65
+            65, 1
         ];
 
         Console.WriteLine($"Number of items in the collection: {data.Length}");
@@ -25,6 +27,9 @@
     private static int CountDuplicates(int[] data)
     {
         // Add code here.
-        return 0;
+
+        var set1 = new HashSet<int>(data);
+        var duplicates = data.Length - set1.Count;
+        return duplicates;
     }
 }

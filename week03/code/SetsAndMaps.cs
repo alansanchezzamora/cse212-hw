@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 public static class SetsAndMaps
@@ -22,7 +23,24 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+
+        var set1 = new HashSet<string>(words);
+        var result = new List<string>();
+
+        foreach (var word in words)
+        {
+            var reversed = new string(word.Reverse().ToArray());
+
+            if (set1.Contains(reversed))
+            {
+                if (string.Compare(word, reversed) < 0)
+                {
+                    result.Add($"{word} & {reversed}");
+                }
+            }
+
+        }
+        return result.ToArray();
     }
 
     /// <summary>
@@ -43,6 +61,18 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+            var degree = fields[3].Trim();
+
+            if (!degrees.ContainsKey(degree))
+            {
+                degrees[degree] = 1;
+
+            }
+            else
+            {
+                degrees[degree] += 1;
+            }
+
         }
 
         return degrees;
@@ -66,8 +96,53 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
+  if (word1 == null || word2 == null) return false;
+
+    // Normalizar
+    string w1 = word1.Replace(" ", "").ToLower();
+    string w2 = word2.Replace(" ", "").ToLower();
+
+    if (w1.Length != w2.Length)
         return false;
+
+    var summary1 = BuildSummary(w1);
+    var summary2 = BuildSummary(w2);
+
+    // compare the dictionariesF
+    if (summary1.Count != summary2.Count)
+        return false;
+
+    foreach (var entry in summary1)
+    {
+        char letter = entry.Key;
+        int count = entry.Value;
+
+        if (!summary2.ContainsKey(letter) || summary2[letter] != count)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+private static Dictionary<char, int> BuildSummary(string word)
+{
+    var summary = new Dictionary<char, int>();
+
+    foreach (char c in word)
+    {
+        if (!summary.ContainsKey(c))
+        {
+            summary[c] = 1;
+        }
+        else
+        {
+            summary[c]++;
+        }
+    }
+
+    return summary;;
     }
 
     /// <summary>
