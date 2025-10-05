@@ -11,9 +11,14 @@ public class PriorityQueueTests
     // Defect(s) Found: 
     public void TestPriorityQueue_1()
     {
-        var priorityQueue = new PriorityQueue();
-        Assert.Fail("Implement the test case and then remove this.");
+        var queue = new PriorityQueue();
+        queue.Enqueue("A", 1);
+
+        var result = queue.Dequeue();
+
+        Assert.AreEqual("A", result);
     }
+
 
     [TestMethod]
     // Scenario: 
@@ -21,9 +26,16 @@ public class PriorityQueueTests
     // Defect(s) Found: 
     public void TestPriorityQueue_2()
     {
-        var priorityQueue = new PriorityQueue();
-        Assert.Fail("Implement the test case and then remove this.");
+        var queue = new PriorityQueue();
+        queue.Enqueue("Low", 1);
+        queue.Enqueue("High", 5);
+        queue.Enqueue("Medium", 3);
+
+        var result = queue.Dequeue();
+
+        Assert.AreEqual("High", result);
     }
 
     // Add more test cases as needed below.
+
 }
