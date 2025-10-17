@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 public class Node
 {
     public int Data { get; set; }
@@ -21,7 +23,7 @@ public class Node
             else
                 Left.Insert(value);
         }
-        else
+        else if (value > Data)
         {
             // Insert to the right
             if (Right is null)
@@ -29,12 +31,33 @@ public class Node
             else
                 Right.Insert(value);
         }
+        else
+        {
+            Console.WriteLine($"Duplicate Value {value},, skipped.");
+        }
     }
 
     public bool Contains(int value)
     {
-        // TODO Start Problem 2
-        return false;
+    if (value < Data)
+    {
+    
+        if (Left is null)
+            return false;           
+        else
+            return Left.Contains(value);
+    }
+    else if (value > Data)
+    {
+        if (Right is null)
+            return false;
+        else
+            return Right.Contains(value);
+    }
+    else
+    {
+        return true;
+    }
     }
 
     public int GetHeight()
